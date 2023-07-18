@@ -37,9 +37,11 @@ export const StoreModal = () => {
       setLoading(true);
       const res = await axios.post("/api/stores", values);
 
-      console.log(res.data);
+      window.location.assign(`/${res.data.id}`);
     } catch (error) {
       console.log("[Store_Modal_Submit]", error);
+    } finally {
+      setLoading(false);
     }
 
     console.log(values);
