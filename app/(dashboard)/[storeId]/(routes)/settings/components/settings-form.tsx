@@ -21,6 +21,9 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import AlertModal from "@/components/modals/alert-modal";
+import { ApiAlert } from "@/components/ui/api-alert";
+import { useOrigin } from "@/hooks/use-origin";
 
 interface SettingsFormProps {
   data: Store;
@@ -37,6 +40,7 @@ const SettingsForm: React.FC<SettingsFormProps> = ({ data, ...props }) => {
   const [loading, setLoading] = useState(false);
   const params = useParams();
   const router = useRouter();
+  const origin = useOrigin();
 
   const form = useForm<SettingsFormValues>({
     resolver: zodResolver(formSchema),
@@ -49,21 +53,42 @@ const SettingsForm: React.FC<SettingsFormProps> = ({ data, ...props }) => {
       await axios.patch(`/api/stores/${params.storeId}`, submitData);
       router.refresh();
     } catch (error) {
-      console.log("[FORM_SUBMIT", error);
+      console.log("[FORM_SUBMIT]", error);
     } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleDelete = async () => {
+    try {
+      setLoading(true);
+      await axios.delete(`/api/stores/${params.storeId}`);
+      router.refresh();
+      router.push("/");
+    } catch (error) {
+      console.log("[STORE_DELETE]", error);
+    } finally {
+      setOpen(false);
       setLoading(false);
     }
   };
 
   return (
     <>
+      <AlertModal
+        isOpen={open}
+        onClose={() => setOpen(false)}
+        onConfirm={handleDelete}
+        loading={loading}
+      />
+
       <div className="flex items-center justify-between">
         <Heading title="Configurações" description="Configrações de sua loja" />
         <Button
           disabled={loading}
           variant="destructive"
           size="sm"
-          onClick={() => {}}
+          onClick={() => setOpen(true)}
         >
           <Trash className="h-5 w-5" />
         </Button>
@@ -74,15 +99,15 @@ const SettingsForm: React.FC<SettingsFormProps> = ({ data, ...props }) => {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(handleSubmit)}
-          className="space-y-10 w-full"
+          className="space-y-10 w-full mt-3"
         >
-          <div className="grid grid-cols-3 gap-8">
+          <div className="grid grid-cols-3 gap-8 pl-3">
             <FormField
               control={form.control}
               name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Nome</FormLabel>
+                  <FormLabel>Nome:</FormLabel>
                   <FormControl>
                     <Input
                       disabled={loading}
@@ -100,6 +125,14 @@ const SettingsForm: React.FC<SettingsFormProps> = ({ data, ...props }) => {
           </Button>
         </form>
       </Form>
+
+      <Separator />
+
+      <ApiAlert
+        title="NEXT_PUBLIC_API_URL"
+        description={`${origin}/api/${params.storeId}`}
+        type="public"
+      />
     </>
   );
 };

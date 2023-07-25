@@ -3,6 +3,7 @@ import { useParams, usePathname } from "next/navigation";
 
 import { cn } from "@/lib/utils";
 import Link from "next/link";
+import { useOrigin } from "@/hooks/use-origin";
 
 export const MainNav = ({
   className,
@@ -10,15 +11,25 @@ export const MainNav = ({
 }: React.HTMLAttributes<HTMLElement>) => {
   const pathname = usePathname();
   const params = useParams();
-
+  const origin = useOrigin();
   const routes = [
     {
+      href: `${origin}/${params.storeId}`,
+      label: "Dashboard",
+      active: pathname === `/${params.storeId}`,
+    },
+    {
       href: `/${params.storeId}/settings`,
-      label: "Settings",
+      label: "Configurações",
       active: pathname === `/${params.storeId}/settings`,
     },
+    {
+      href: `${origin}/${params.storeId}/billboards`,
+      label: `Billboards`,
+      active: pathname === `${origin}/${params.storeId}/billboards`,
+    },
   ];
-
+  console.log(pathname);
   return (
     <>
       <nav
