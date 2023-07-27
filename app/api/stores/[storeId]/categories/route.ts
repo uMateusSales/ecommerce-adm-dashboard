@@ -10,7 +10,7 @@ export async function POST(
   try {
     const { userId } = auth();
     const body = await req.json();
-    const { label, imageUrl } = body;
+    const { name, billboardId } = body;
     if (!userId) {
       return new NextResponse("Unauthorized user", { status: 401 });
     }
@@ -19,14 +19,14 @@ export async function POST(
       return new NextResponse("Sotre ID not found", { status: 400 });
     }
 
-    if (!label) {
-      return new NextResponse("Label is required", { status: 400 });
+    if (!name) {
+      return new NextResponse("Name is required", { status: 400 });
     }
 
-    if (!imageUrl) {
-      return new NextResponse("Image url required", { status: 400 });
+    if (!billboardId) {
+      return new NextResponse("Billboard ID required", { status: 400 });
     }
-    if (typeof label !== "string") {
+    if (typeof name !== "string") {
       return new NextResponse("Invalid name data", { status: 400 });
     }
 
@@ -38,17 +38,17 @@ export async function POST(
       return new NextResponse("Unathourized user", { status: 403 });
     }
 
-    const billboard = await prisma.billBoard.create({
+    const category = await prisma.category.create({
       data: {
-        label,
-        imageUrl,
+        name,
+        billboardId,
         storeId: params.storeId,
       },
     });
 
-    return NextResponse.json(billboard);
+    return NextResponse.json(category);
   } catch (error) {
-    console.log("[BILLBOARD_POST]", error);
+    console.log("[CATEGRIES_POST]", error);
 
     return new NextResponse("interal error", { status: 500 });
   }
@@ -63,13 +63,13 @@ export async function GET(
       return new NextResponse("Sotre ID not found", { status: 400 });
     }
 
-    const billboards = await prisma.billBoard.findMany({
+    const categories = await prisma.category.findMany({
       where: { storeId: params.storeId },
     });
 
-    return NextResponse.json(billboards);
+    return NextResponse.json(categories);
   } catch (error) {
-    console.log("[BILLBOARD_GET]", error);
+    console.log("[CATEGORIES_GET]", error);
 
     return new NextResponse("interal error", { status: 500 });
   }
