@@ -36,10 +36,10 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
   const handleDelete = async () => {
     try {
       setLoading(true);
-      await axios.delete(`/api/stores/${params.storeId}/billboards/${data.id}`);
+      await axios.delete(`/api/stores/${params.storeId}/products/${data.id}`);
       router.refresh();
     } catch (error) {
-      console.log("[BILLBOARD_DELETE]", error);
+      console.log("[PRODUCT_DELETE]", error);
     } finally {
       setOpen(false);
       setLoading(false);
@@ -72,7 +72,7 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
             <Edit className="h-5 w-5 mr-2" />
             Copy id
           </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => router.push(`billboard/${data.id}`)}>
+          <DropdownMenuItem onClick={() => router.push(`products/${data.id}`)}>
             <Edit className="h-5 w-5 mr-2" />
             Update
           </DropdownMenuItem>
