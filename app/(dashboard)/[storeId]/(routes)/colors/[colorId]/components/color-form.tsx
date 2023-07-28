@@ -1,6 +1,6 @@
 "use client";
 
-import { BillBoard, Category } from "@prisma/client";
+import { Color } from "@prisma/client";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
@@ -22,66 +22,57 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import AlertModal from "@/components/modals/alert-modal";
-import { ApiAlert } from "@/components/ui/api-alert";
 import { useOrigin } from "@/hooks/use-origin";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 
-interface CategoryFormProps {
-  data: Category | null;
-  billboards: BillBoard[];
+interface ColorFormProps {
+  data: Color | null;
 }
 
 const formSchema = z.object({
   name: z.string().min(1),
-  billboardId: z.string().min(1),
+  value: z
+    .string()
+    .min(4)
+    .regex(/^#[0-9A-F]{6}$/, { message: "String must be a valid hex code" }),
 });
 
-type CategoryFormValues = z.infer<typeof formSchema>;
+type ColorFormValues = z.infer<typeof formSchema>;
 
-const CategoryForm: React.FC<CategoryFormProps> = ({
-  data,
-  billboards,
-  ...props
-}) => {
+const ColorForm: React.FC<ColorFormProps> = ({ data, ...props }) => {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const params = useParams();
   const router = useRouter();
   const origin = useOrigin();
 
-  const title = data ? "Edit category" : "Create category";
-  const description = data ? "Edit category" : "Add new category";
+  const title = data ? "Editar cor" : "Criar cor";
+  const description = data ? "Editar cor" : "Adicionar nova cor";
   const action = data ? "Salvar alterações" : "Criar ";
 
-  const form = useForm<CategoryFormValues>({
+  const form = useForm<ColorFormValues>({
     resolver: zodResolver(formSchema),
-    defaultValues: data || { name: "", billboardId: "" },
+    defaultValues: data || { name: "", value: "" },
   });
 
-  const handleSubmit = async (submitData: CategoryFormValues) => {
+  const handleSubmit = async (submitData: ColorFormValues) => {
     try {
       setLoading(true);
       if (data) {
         await axios.patch(
-          `${origin}/api/stores/${params.storeId}/categories/${params.categoryId}`,
+          `${origin}/api/stores/${params.storeId}/colors/${params.colorId}`,
           submitData
         );
       } else {
         await axios.post(
-          `${origin}/api/stores/${params.storeId}/categories`,
+          `${origin}/api/stores/${params.storeId}/colors`,
           submitData
         );
       }
+
       router.refresh();
-      router.push(`${origin}/${params.storeId}/categories`);
+      router.push(`${origin}/${params.storeId}/colors`);
     } catch (error) {
-      console.log("[CATEGORY_SUBMIT]", error);
+      console.log("[COLORS_SUBMIT]", error);
     } finally {
       setLoading(false);
     }
@@ -91,12 +82,12 @@ const CategoryForm: React.FC<CategoryFormProps> = ({
     try {
       setLoading(true);
       await axios.delete(
-        `/api/stores/${params.storeId}/categories/${params.categoryId}`
+        `/api/stores/${params.storeId}/colors/${params.colorId}`
       );
 
-      router.push(`${origin}/${params.storeId}/categories`);
+      router.push(`${origin}/${params.storeId}/colors`);
     } catch (error) {
-      console.log("[CATEGORY_DELETE]", error);
+      console.log("[COLORS_DELETE]", error);
     } finally {
       setOpen(false);
       setLoading(false);
@@ -139,11 +130,11 @@ const CategoryForm: React.FC<CategoryFormProps> = ({
               name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Name</FormLabel>
+                  <FormLabel>Color</FormLabel>
                   <FormControl>
                     <Input
                       disabled={loading}
-                      placeholder="Category name"
+                      placeholder="Nome da cor"
                       {...field}
                     />
                   </FormControl>
@@ -153,34 +144,23 @@ const CategoryForm: React.FC<CategoryFormProps> = ({
             />
             <FormField
               control={form.control}
-              name="billboardId"
+              name="value"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Billboard</FormLabel>
-
-                  <Select
-                    disabled={loading}
-                    onValueChange={field.onChange}
-                    value={field.value}
-                    defaultValue={field.value}
-                  >
-                    <FormControl>
-                      <SelectTrigger>
-                        <SelectValue
-                          defaultValue={field.value}
-                          placeholder="Select a billboard"
-                        />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      {billboards.map((i) => (
-                        <SelectItem key={i.id} value={i.id}>
-                          {i.label}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-
+                  <FormLabel>Value</FormLabel>
+                  <FormControl>
+                    <div className="flex items-center gap-x-4">
+                      <Input
+                        disabled={loading}
+                        placeholder="Color value"
+                        {...field}
+                      />
+                      <div
+                        className="border p-4 rounded-full"
+                        style={{ backgroundColor: field.value }}
+                      />
+                    </div>
+                  </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
@@ -197,4 +177,4 @@ const CategoryForm: React.FC<CategoryFormProps> = ({
   );
 };
 
-export default CategoryForm;
+export default ColorForm;

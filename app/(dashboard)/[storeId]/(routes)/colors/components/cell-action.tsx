@@ -10,7 +10,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { CategoryColumn } from "./columns";
+import { ColorColmumn } from "./columns";
 import { Edit, MoreHorizontal } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -18,7 +18,7 @@ import axios from "axios";
 import AlertModal from "@/components/modals/alert-modal";
 
 interface CellActionProps {
-  data: CategoryColumn;
+  data: ColorColmumn;
 }
 
 export const CellAction: React.FC<CellActionProps> = ({ data }) => {
@@ -36,10 +36,10 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
   const handleDelete = async () => {
     try {
       setLoading(true);
-      await axios.delete(`/api/stores/${params.storeId}/categories/${data.id}`);
+      await axios.delete(`/api/stores/${params.storeId}/colors/${data.id}`);
       router.refresh();
     } catch (error) {
-      console.log("[CATEGORIES_DELETE]", error);
+      console.log("[COLORS_DELETE]", error);
     } finally {
       setOpen(false);
       setLoading(false);
@@ -72,9 +72,7 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
             <Edit className="h-5 w-5 mr-2" />
             Copy id
           </DropdownMenuItem>
-          <DropdownMenuItem
-            onClick={() => router.push(`categories/${data.id}`)}
-          >
+          <DropdownMenuItem onClick={() => router.push(`colors/${data.id}`)}>
             <Edit className="h-5 w-5 mr-2" />
             Update
           </DropdownMenuItem>

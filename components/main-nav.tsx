@@ -19,19 +19,34 @@ export const MainNav = ({
       active: pathname === `/${params.storeId}`,
     },
     {
+      href: `${origin}/${params.storeId}/billboards`,
+      label: `Billboards`,
+      active: pathname === `/${params.storeId}/billboards`,
+    },
+    {
       href: `${origin}/${params.storeId}/categories`,
       label: `Categorias`,
       active: pathname === `/${params.storeId}/categories`,
     },
     {
+      href: `${origin}/${params.storeId}/sizes`,
+      label: `Tamanhos`,
+      active: pathname === `/${params.storeId}/sizes`,
+    },
+    {
+      href: `${origin}/${params.storeId}/colors`,
+      label: `Cores`,
+      active: pathname === `/${params.storeId}/colors`,
+    },
+    {
+      href: `${origin}/${params.storeId}/products`,
+      label: `Produtos`,
+      active: pathname === `/${params.storeId}/products`,
+    },
+    {
       href: `/${params.storeId}/settings`,
       label: "Configurações",
       active: pathname === `/${params.storeId}/settings`,
-    },
-    {
-      href: `${origin}/${params.storeId}/billboards`,
-      label: `Billboards`,
-      active: pathname === `/${params.storeId}/billboards`,
     },
   ];
   console.log(pathname);

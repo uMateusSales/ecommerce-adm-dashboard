@@ -1,15 +1,20 @@
-import prisma from "@/lib/prismadb"
-import {format} from 'date-fns'
+import prisma from "@/lib/prismadb";
+import { format } from "date-fns";
 
 import { BillboardClient } from "./components/client";
 import { BillBoardColumn } from "./components/columns";
 
+const BillboardPage = async ({ params }: { params: { storeId: string } }) => {
+  const billboards = await prisma.billBoard.findMany({
+    where: { storeId: params.storeId },
+    orderBy: { createdAt: "desc" },
+  });
 
-const BillboardPage = async ({params}: {params: {storeId: string}}) => {
-
-const billboards= await prisma.billBoard.findMany({where: {storeId: params.storeId}, orderBy: {createdAt: 'desc'}})
-
-const formattedBillboards: BillBoardColumn[] = billboards.map((i) => ({id: i.id, createdAt: format(i.createdAt, 'MMMM do, yyyy'), label: i.label}) )
+  const formattedBillboards: BillBoardColumn[] = billboards.map((i) => ({
+    id: i.id,
+    createdAt: format(i.createdAt, "MMMM do, yyyy"),
+    label: i.label,
+  }));
 
   return (
     <>
