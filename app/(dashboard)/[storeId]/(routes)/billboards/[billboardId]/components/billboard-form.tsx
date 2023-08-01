@@ -61,6 +61,8 @@ const BillboardForm: React.FC<BillboardFormProps> = ({ data, ...props }) => {
           `${origin}/api/stores/${params.storeId}/billboards/${params.billboardId}`,
           submitData
         );
+        router.refresh();
+        router.push(`${origin}/${params.storeId}/billboards`);
       } else {
         await axios.post(
           `${origin}/api/stores/${params.storeId}/billboards`,
