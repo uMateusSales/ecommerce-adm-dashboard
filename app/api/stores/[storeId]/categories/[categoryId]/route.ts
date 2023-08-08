@@ -91,6 +91,7 @@ export async function GET(
 
     const findUniqueCategory = await prisma.category.findFirst({
       where: { id: params.categoryId },
+      include: { billboard: true },
     });
 
     return NextResponse.json(findUniqueCategory);
