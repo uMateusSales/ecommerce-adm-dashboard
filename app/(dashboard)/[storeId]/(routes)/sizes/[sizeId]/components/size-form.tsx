@@ -42,8 +42,8 @@ const SizeForm: React.FC<SizeFormProps> = ({ data, ...props }) => {
   const router = useRouter();
   const origin = useOrigin();
 
-  const title = data ? "Edit sizes" : "Create size";
-  const description = data ? "Edit size" : "Add new size";
+  const title = data ? "Editar tamanhos" : "Criar tamanho";
+  const description = data ? "Editar tamanho" : "Criar novo tamanho";
   const action = data ? "Salvar alterações" : "Criar ";
 
   const form = useForm<SizeFormValues>({
@@ -131,7 +131,7 @@ const SizeForm: React.FC<SizeFormProps> = ({ data, ...props }) => {
                   <FormControl>
                     <Input
                       disabled={loading}
-                      placeholder="Name Label"
+                      placeholder="Nome"
                       {...field}
                     />
                   </FormControl>
@@ -144,11 +144,11 @@ const SizeForm: React.FC<SizeFormProps> = ({ data, ...props }) => {
               name="value"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Value</FormLabel>
+                  <FormLabel>Valor</FormLabel>
                   <FormControl>
                     <Input
                       disabled={loading}
-                      placeholder="Size value"
+                      placeholder="Valor do tamanho"
                       {...field}
                     />
                   </FormControl>

@@ -131,7 +131,7 @@ const BillboardForm: React.FC<BillboardFormProps> = ({ data, ...props }) => {
             name="imageUrl"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Background image</FormLabel>
+                <FormLabel>Imagem de fundo</FormLabel>
                 <FormControl>
                   <ImageUpload
                     disabled={loading}
@@ -150,11 +150,11 @@ const BillboardForm: React.FC<BillboardFormProps> = ({ data, ...props }) => {
               name="label"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Label</FormLabel>
+                  <FormLabel>Nome</FormLabel>
                   <FormControl>
                     <Input
                       disabled={loading}
-                      placeholder="Billboard Label"
+                      placeholder="Nome da vitrine"
                       {...field}
                     />
                   </FormControl>

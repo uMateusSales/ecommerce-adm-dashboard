@@ -58,7 +58,7 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant="ghost" className="h-10 -w-8 p-0">
-            <span className="sr-only">Open menu</span>
+            <span className="sr-only">Abrir menu</span>
             <MoreHorizontal className="w-5 h-5" />
           </Button>
         </DropdownMenuTrigger>
@@ -70,15 +70,15 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
           </DropdownMenuItem>
           <DropdownMenuItem onClick={() => onCopy(data.id)}>
             <Edit className="h-5 w-5 mr-2" />
-            Copy id
+            Copiar id
           </DropdownMenuItem>
           <DropdownMenuItem onClick={() => router.push(`products/${data.id}`)}>
             <Edit className="h-5 w-5 mr-2" />
-            Update
+            Atualizar
           </DropdownMenuItem>
           <DropdownMenuItem onClick={() => setOpen(true)}>
             <Edit className="h-5 w-5 mr-2" />
-            Delete
+            Deletar
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>

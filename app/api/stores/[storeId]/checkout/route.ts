@@ -4,8 +4,6 @@ import { NextResponse } from "next/server";
 import prisma from "@/lib/prismadb";
 
 import { stripe } from "@/lib/stripe";
-import { headers } from "next/dist/client/components/headers";
-import { connect } from "http2";
 
 const corsHeaders = {
   "Acess-Control-Allow-Origin": "*",
@@ -21,7 +19,7 @@ export const POST = async (
   req: Request,
   { params }: { params: { storeId: string } }
 ) => {
-  const { productIds } = req.json();
+  const { productIds } = await req.json();
 
   if (!productIds || productIds.lenght === 0) {
     return new NextResponse("No product id found", { status: 400 });

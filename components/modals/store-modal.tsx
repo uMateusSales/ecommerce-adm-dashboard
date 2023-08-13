@@ -67,7 +67,7 @@ export const StoreModal = () => {
                     <FormMessage />
                     <Input
                       disabled={loading}
-                      placeholder="E-Commenrce"
+                      placeholder="E-Commerce"
                       {...field}
                     />
                   </FormItem>

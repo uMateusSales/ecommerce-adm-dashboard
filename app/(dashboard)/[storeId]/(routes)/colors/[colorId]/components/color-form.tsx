@@ -130,7 +130,7 @@ const ColorForm: React.FC<ColorFormProps> = ({ data, ...props }) => {
               name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Color</FormLabel>
+                  <FormLabel>Cor</FormLabel>
                   <FormControl>
                     <Input
                       disabled={loading}
@@ -147,12 +147,12 @@ const ColorForm: React.FC<ColorFormProps> = ({ data, ...props }) => {
               name="value"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Value</FormLabel>
+                  <FormLabel>Valor</FormLabel>
                   <FormControl>
                     <div className="flex items-center gap-x-4">
                       <Input
                         disabled={loading}
-                        placeholder="Color value"
+                        placeholder="Valor da cor (hex)"
                         {...field}
                       />
                       <div

@@ -30,7 +30,7 @@ const AlertModal: React.FC<AlertModalProps> = ({
   return (
     <>
       <Modal
-        title="Tem cereza ?"
+        title="Tem certeza ?"
         description="Esta ação não pode ser desfeita"
         isOpen={isOpen}
         onClose={onClose}

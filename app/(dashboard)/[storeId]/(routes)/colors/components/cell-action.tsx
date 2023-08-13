@@ -28,7 +28,7 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
 
   const router = useRouter();
   const params = useParams();
-  const origin = useOrigin();
+ 
 
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
@@ -70,15 +70,15 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
           </DropdownMenuItem>
           <DropdownMenuItem onClick={() => onCopy(data.id)}>
             <Edit className="h-5 w-5 mr-2" />
-            Copy id
+            Copiar id
           </DropdownMenuItem>
           <DropdownMenuItem onClick={() => router.push(`colors/${data.id}`)}>
             <Edit className="h-5 w-5 mr-2" />
-            Update
+            Atualizar
           </DropdownMenuItem>
           <DropdownMenuItem onClick={() => setOpen(true)}>
             <Edit className="h-5 w-5 mr-2" />
-            Delete
+            Deletar
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>

@@ -9,7 +9,7 @@ const DashboardPage: React.FC<DashboardPageProps> = async ({ params }) => {
 
   return (
     <div>
-      <h1>This is the Dashboard</h1>
+      <h1>Bem vindo a sua loja, comece a configurar nas opções acima!</h1>
       <p>Loja: {store?.name}</p>
     </div>
   );

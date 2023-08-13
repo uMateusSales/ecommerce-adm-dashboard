@@ -10,7 +10,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { CategoryColumn } from "./columns";
+import { OrderColumn } from "./columns";
 import { Edit, MoreHorizontal } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -18,7 +18,7 @@ import axios from "axios";
 import AlertModal from "@/components/modals/alert-modal";
 
 interface CellActionProps {
-  data: CategoryColumn;
+  data: OrderColumn;
 }
 
 export const CellAction: React.FC<CellActionProps> = ({ data }) => {
@@ -28,7 +28,7 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
 
   const router = useRouter();
   const params = useParams();
-  const origin = useOrigin();
+ 
 
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
@@ -36,10 +36,10 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
   const handleDelete = async () => {
     try {
       setLoading(true);
-      await axios.delete(`/api/stores/${params.storeId}/categories/${data.id}`);
+      await axios.delete(`/api/stores/${params.storeId}/orders/${data.id}`);
       router.refresh();
     } catch (error) {
-      console.log("[CATEGORIES_DELETE]", error);
+      console.log("[ORDER_DELETE]", error);
     } finally {
       setOpen(false);
       setLoading(false);
@@ -58,7 +58,7 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant="ghost" className="h-10 -w-8 p-0">
-            <span className="sr-only">Open menu</span>
+            <span className="sr-only">Abrir menu</span>
             <MoreHorizontal className="w-5 h-5" />
           </Button>
         </DropdownMenuTrigger>
@@ -71,12 +71,6 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
           <DropdownMenuItem onClick={() => onCopy(data.id)}>
             <Edit className="h-5 w-5 mr-2" />
             Copiar id
-          </DropdownMenuItem>
-          <DropdownMenuItem
-            onClick={() => router.push(`categories/${data.id}`)}
-          >
-            <Edit className="h-5 w-5 mr-2" />
-            Atualizar
           </DropdownMenuItem>
           <DropdownMenuItem onClick={() => setOpen(true)}>
             <Edit className="h-5 w-5 mr-2" />

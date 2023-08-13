@@ -23,9 +23,7 @@ export async function POST(
       return new NextResponse("Name required", { status: 400 });
     }
 
-    if (!value) {
-      return new NextResponse("Value required", { status: 400 });
-    }
+   
     if (typeof name !== "string") {
       return new NextResponse("Invalid name data", { status: 400 });
     }
