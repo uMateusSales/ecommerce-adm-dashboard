@@ -44,7 +44,7 @@ const BillboardForm: React.FC<BillboardFormProps> = ({ data, ...props }) => {
   const router = useRouter();
   const origin = useOrigin();
 
-  const title = data ? "Edit billboard" : "Create billboard";
+  const title = data ? "Editar vitrine" : "Criar nova vitrine";
   const description = data ? "Edit billboard" : "Add new billboard";
   const action = data ? "Salvar alterações" : "Criar ";
 

@@ -70,7 +70,9 @@ const ProductForm: React.FC<ProductFormProps> = ({
 
   const title = data ? "Editar produto" : "Criar produto";
   const description = data ? "Editar produto" : "Criar novo produto";
-  const action = data ? "Salvar alterações" : "Criar ";
+  const action = data
+    ? "Salvar alterações no produto"
+    : "Adicionar novo produto";
 
   const form = useForm<ProductFormValues>({
     resolver: zodResolver(formSchema),
@@ -79,7 +81,7 @@ const ProductForm: React.FC<ProductFormProps> = ({
       : {
           name: "",
           images: [],
-          price: 0,
+          price: undefined,
           categoryId: "",
           colorId: "",
           sizeId: "",
@@ -189,7 +191,7 @@ const ProductForm: React.FC<ProductFormProps> = ({
               name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>name</FormLabel>
+                  <FormLabel>Nome</FormLabel>
                   <FormControl>
                     <Input
                       disabled={loading}
@@ -336,7 +338,7 @@ const ProductForm: React.FC<ProductFormProps> = ({
                   <div className="space-y-1 leading-none">
                     <FormLabel>Disponivel</FormLabel>
                     <FormDescription>
-                      O produto vai estar disponivel?
+                      Marque para o produto ser exibido na loja
                     </FormDescription>
                   </div>
                 </FormItem>
@@ -356,7 +358,9 @@ const ProductForm: React.FC<ProductFormProps> = ({
                   </FormControl>
                   <div className="space-y-1 leading-none">
                     <FormLabel>Arquivado</FormLabel>
-                    <FormDescription>Produto vai ser arquivado?</FormDescription>
+                    <FormDescription>
+                      Marque se quiser que o produto não seja exibido na loja
+                    </FormDescription>
                   </div>
                 </FormItem>
               )}

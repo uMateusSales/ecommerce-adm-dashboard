@@ -47,7 +47,7 @@ const ColorForm: React.FC<ColorFormProps> = ({ data, ...props }) => {
 
   const title = data ? "Editar cor" : "Criar cor";
   const description = data ? "Editar cor" : "Adicionar nova cor";
-  const action = data ? "Salvar alterações" : "Criar ";
+  const action = data ? "Salvar alterações" : "Confirmar nova cor ";
 
   const form = useForm<ColorFormValues>({
     resolver: zodResolver(formSchema),

@@ -55,9 +55,9 @@ const CategoryForm: React.FC<CategoryFormProps> = ({
   const router = useRouter();
   const origin = useOrigin();
 
-  const title = data ? "Edit category" : "Create category";
+  const title = data ? "Editar categoria" : "Criar nova categoria";
   const description = data ? "Edit category" : "Add new category";
-  const action = data ? "Salvar alterações" : "Criar ";
+  const action = data ? "Salvar alterações" : "Confirmar nova cor ";
 
   const form = useForm<CategoryFormValues>({
     resolver: zodResolver(formSchema),
