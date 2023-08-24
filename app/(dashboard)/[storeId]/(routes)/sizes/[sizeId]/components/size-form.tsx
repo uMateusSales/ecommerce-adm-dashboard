@@ -23,6 +23,7 @@ import {
 import { Input } from "@/components/ui/input";
 import AlertModal from "@/components/modals/alert-modal";
 import { useOrigin } from "@/hooks/use-origin";
+import { toast } from "react-hot-toast";
 
 interface SizeFormProps {
   data: Size | null;
@@ -65,7 +66,7 @@ const SizeForm: React.FC<SizeFormProps> = ({ data, ...props }) => {
           submitData
         );
       }
-
+      toast.success("tamanho atualizado com sucesso");
       router.refresh();
       router.push(`${origin}/${params.storeId}/sizes`);
     } catch (error) {
@@ -129,11 +130,7 @@ const SizeForm: React.FC<SizeFormProps> = ({ data, ...props }) => {
                 <FormItem>
                   <FormLabel>Nome</FormLabel>
                   <FormControl>
-                    <Input
-                      disabled={loading}
-                      placeholder="Nome"
-                      {...field}
-                    />
+                    <Input disabled={loading} placeholder="Nome" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

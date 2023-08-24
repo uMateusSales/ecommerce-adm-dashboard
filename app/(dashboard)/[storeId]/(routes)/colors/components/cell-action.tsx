@@ -16,6 +16,7 @@ import { Button } from "@/components/ui/button";
 
 import axios from "axios";
 import AlertModal from "@/components/modals/alert-modal";
+import { toast } from "react-hot-toast";
 
 interface CellActionProps {
   data: ColorColmumn;
@@ -28,7 +29,6 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
 
   const router = useRouter();
   const params = useParams();
- 
 
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
@@ -37,6 +37,7 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
     try {
       setLoading(true);
       await axios.delete(`/api/stores/${params.storeId}/colors/${data.id}`);
+      toast.success("Cor deletada com sucesso");
       router.refresh();
     } catch (error) {
       console.log("[COLORS_DELETE]", error);

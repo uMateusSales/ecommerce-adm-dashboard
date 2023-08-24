@@ -25,6 +25,7 @@ import AlertModal from "@/components/modals/alert-modal";
 import { ApiAlert } from "@/components/ui/api-alert";
 import { useOrigin } from "@/hooks/use-origin";
 import ImageUpload from "@/components/ui/image-upload";
+import { toast } from "react-hot-toast";
 
 interface BillboardFormProps {
   data: BillBoard | null;
@@ -61,6 +62,7 @@ const BillboardForm: React.FC<BillboardFormProps> = ({ data, ...props }) => {
           `${origin}/api/stores/${params.storeId}/billboards/${params.billboardId}`,
           submitData
         );
+        toast.success("A vitrine foi atualizada com sucesso");
         router.refresh();
         router.push(`${origin}/${params.storeId}/billboards`);
       } else {
@@ -68,6 +70,7 @@ const BillboardForm: React.FC<BillboardFormProps> = ({ data, ...props }) => {
           `${origin}/api/stores/${params.storeId}/billboards`,
           submitData
         );
+        toast.success("Vitrine foi criada com sucesso");
       }
 
       router.refresh();

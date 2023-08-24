@@ -23,6 +23,7 @@ import {
 import { Input } from "@/components/ui/input";
 import AlertModal from "@/components/modals/alert-modal";
 import { useOrigin } from "@/hooks/use-origin";
+import { toast } from "react-hot-toast";
 
 interface ColorFormProps {
   data: Color | null;
@@ -68,7 +69,7 @@ const ColorForm: React.FC<ColorFormProps> = ({ data, ...props }) => {
           submitData
         );
       }
-
+      toast.success("A cor foi atualizada com sucesso");
       router.refresh();
       router.push(`${origin}/${params.storeId}/colors`);
     } catch (error) {

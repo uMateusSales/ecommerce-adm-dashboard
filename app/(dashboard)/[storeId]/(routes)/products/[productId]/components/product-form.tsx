@@ -34,6 +34,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox";
+import { toast } from "react-hot-toast";
 
 interface ProductFormProps {
   data: (Product & { images: Image[] }) | null;
@@ -104,7 +105,7 @@ const ProductForm: React.FC<ProductFormProps> = ({
           submitData
         );
       }
-
+      toast.success("Produto atualizado com sucesso");
       router.refresh();
       router.push(`${origin}/${params.storeId}/products`);
     } catch (error) {

@@ -31,6 +31,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { toast } from "react-hot-toast";
 
 interface CategoryFormProps {
   data: Category | null;
@@ -78,6 +79,7 @@ const CategoryForm: React.FC<CategoryFormProps> = ({
           submitData
         );
       }
+      toast.success("Categoria atualizada com sucesso");
       router.refresh();
       router.push(`${origin}/${params.storeId}/categories`);
     } catch (error) {

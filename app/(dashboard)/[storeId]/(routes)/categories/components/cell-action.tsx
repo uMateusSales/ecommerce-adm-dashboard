@@ -16,6 +16,7 @@ import { Button } from "@/components/ui/button";
 
 import axios from "axios";
 import AlertModal from "@/components/modals/alert-modal";
+import { toast } from "react-hot-toast";
 
 interface CellActionProps {
   data: CategoryColumn;
@@ -37,6 +38,7 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
     try {
       setLoading(true);
       await axios.delete(`/api/stores/${params.storeId}/categories/${data.id}`);
+      toast.success("Categoria deletada com sucesso");
       router.refresh();
     } catch (error) {
       console.log("[CATEGORIES_DELETE]", error);

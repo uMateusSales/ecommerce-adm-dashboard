@@ -16,6 +16,7 @@ import { Button } from "@/components/ui/button";
 
 import axios from "axios";
 import AlertModal from "@/components/modals/alert-modal";
+import { toast } from "react-hot-toast";
 
 interface CellActionProps {
   data: BillBoardColumn;
@@ -37,6 +38,7 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
     try {
       setLoading(true);
       await axios.delete(`/api/stores/${params.storeId}/billboards/${data.id}`);
+      toast.success("Vitrine deletada com sucesso");
       router.refresh();
     } catch (error) {
       console.log("[BILLBOARD_DELETE]", error);
@@ -70,7 +72,7 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
           </DropdownMenuItem>
           <DropdownMenuItem onClick={() => onCopy(data.id)}>
             <Edit className="h-5 w-5 mr-2" />
-           Copiar id
+            Copiar id
           </DropdownMenuItem>
           <DropdownMenuItem
             onClick={() => router.push(`billboards/${data.id}`)}
