@@ -7,10 +7,12 @@ import { ClerkProvider } from "@clerk/nextjs";
 import { ModalProvider } from "@/providers/modal-provider";
 import { ThemeProvider } from "@/providers/theme-provider";
 import ToastProvider from "@/providers/toast-provider";
+import NextTopLoader from "nextjs-toploader";
 
 export const metadata: Metadata = {
   title: "Central do administrador",
-  description: "Admnistre as funções de sua loja virtual",
+  description:
+    "Admnistre as funções de sua loja virtual para ficarem expostas em seu site",
 };
 
 export default function RootLayout({
@@ -20,9 +22,10 @@ export default function RootLayout({
 }) {
   return (
     <ClerkProvider>
-      <html lang="en">
+      <html lang="pt-BR">
         <body className={inter.className}>
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+            <NextTopLoader />
             <ToastProvider />
             <ModalProvider />
             {children}
