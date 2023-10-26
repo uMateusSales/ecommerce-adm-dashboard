@@ -1,9 +1,6 @@
-import Stripe from "stripe";
 import { NextResponse } from "next/server";
 
 import prisma from "@/lib/prismadb";
-
-import { stripe } from "@/lib/stripe";
 
 const corsHeaders = {
   "Acess-Control-Allow-Origin": "*",
@@ -28,19 +25,6 @@ export const POST = async (
     where: { id: { in: productIds } },
   });
 
-  const line_items: Stripe.Checkout.SessionCreateParams.LineItem[] = [];
-
-  products.forEach((i) =>
-    line_items.push({
-      quantity: 1,
-      price_data: {
-        currency: "BRL",
-        product_data: { name: i.name },
-        unit_amount: i.price.toNumber() * 100,
-      },
-    })
-  );
-
   const order = await prisma.order.create({
     data: {
       storeId: params.storeId,
@@ -53,15 +37,5 @@ export const POST = async (
     },
   });
 
-  const session = await stripe.checkout.sessions.create({
-    line_items,
-    mode: "payment",
-    billing_address_collection: "required",
-    phone_number_collection: { enabled: true },
-    success_url: `${process.env.FRONTEND_STORE_URL}/cart?sucess=1`,
-    cancel_url: `${process.env.FRONTEND_STORE_URL}/cart?canceled=1`,
-    metadata: { orderId: order.id },
-  });
-
-  return NextResponse.json({ url: session.url }, { headers: corsHeaders });
+  return NextResponse.json({ headers: corsHeaders });
 };
