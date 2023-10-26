@@ -1,5 +1,12 @@
 import { MainNav } from "@/components/main-nav";
 import { QuickLinks } from "@/components/quicklinks";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import prisma from "@/lib/prismadb";
 
 interface DashboardPageProps {
@@ -26,11 +33,25 @@ const DashboardPage: React.FC<DashboardPageProps> = async ({ params }) => {
     where: { storeId: params.storeId },
   });
   return (
-    <div className="grid grid-cols-2 p-2">
+    <div className="grid grid-cols-2 p-2 gap-3 mx-5">
       <div className="flex flex-col gap-2">
-        <h1 className="text-3xl">Bem vindo ao administrador de sua loja!</h1>
-        <p className="font-semibold">Loja: {store?.name}</p>
-        <p className="font-semibold">Vitrine principal: {vitrine?.label}</p>
+        <Card className="shadow">
+          <CardHeader className="flex flex-col items-center">
+            <CardTitle className="text-3xl">
+              Bem vindo ao administrador de sua loja!
+            </CardTitle>
+            <CardDescription className="font-semibold">
+              Aqui você vai poder configurar tudo que sua loja precisa para
+              funcionar
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="flex flex-col items-center text-lg">
+            Sua loja é: {store?.name}
+            <p className="font-semibold">
+              Sua vitrine principal é a : {vitrine?.label}
+            </p>
+          </CardContent>
+        </Card>
         <p>Vou te falar passo a passo pra você jar ir começando...</p>
         <p>
           1 - Comece criando uma vitrine nova,{" "}
@@ -56,22 +77,24 @@ const DashboardPage: React.FC<DashboardPageProps> = async ({ params }) => {
           vitrine. Apos isso o produto ficara exposto em seu site
         </p>
       </div>
-      <div className="flex flex-col items-center gap-2">
-        <h2>
-          Clique em alguns dos botões abaixo para ir mais rapidamente criar algo
-          que deseja
-        </h2>
-        <QuickLinks />
-        <div className="flex flex-col items-center mt-6">
-          <p>Atualmente você possui cadastrados:</p>
-          <div className="font-semibold">
-            <p>{produtos.length} produtos</p>
-            <p>{categorias.length} categorias</p>
-            <p>{cores.length} cores</p>
-            <p>{tamanhos.length} tamanhos</p>
+      <Card>
+        <div className="flex flex-col items-center gap-2">
+          <h2>
+            Clique em alguns dos botões abaixo para ir mais rapidamente criar
+            algo que deseja
+          </h2>
+          <QuickLinks />
+          <div className="flex flex-col items-center mt-6">
+            <p>Atualmente você possui cadastrados:</p>
+            <div className="font-semibold">
+              <p>{produtos.length} produtos</p>
+              <p>{categorias.length} categorias</p>
+              <p>{cores.length} cores</p>
+              <p>{tamanhos.length} tamanhos</p>
+            </div>
           </div>
         </div>
-      </div>
+      </Card>
     </div>
   );
 };
