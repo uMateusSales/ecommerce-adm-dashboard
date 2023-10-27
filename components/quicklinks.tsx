@@ -26,14 +26,17 @@ export const QuickLinks = ({
   return (
     <>
       <div
-        className={cn("flex items-center space-x-4 lg:space-x-6", className)}
+        className={cn(
+          "flex items-center justify-between  lg:space-x-6",
+          className
+        )}
       >
         {routes.map((i) => (
           <Link
             href={i.href}
             key={i.href}
             className={cn(
-              "text-sm p-1 font-semibold border rounded-md border-neutral-600 hover:bg-neutral-800"
+              "text-sm  p-4 font-semibold border rounded-md border-neutral-600 hover:bg-slate-300"
             )}
           >
             {i.label}

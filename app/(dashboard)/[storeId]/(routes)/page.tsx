@@ -1,9 +1,11 @@
-import { MainNav } from "@/components/main-nav";
+import ConfigCard from "@/components/ConfigCard";
+
 import { QuickLinks } from "@/components/quicklinks";
 import {
   Card,
   CardContent,
   CardDescription,
+  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -52,48 +54,62 @@ const DashboardPage: React.FC<DashboardPageProps> = async ({ params }) => {
             </p>
           </CardContent>
         </Card>
-        <p>Vou te falar passo a passo pra você jar ir começando...</p>
-        <p>
-          1 - Comece criando uma vitrine nova,{" "}
-          <span className="font-semibold">
-            a vitrine sera o banner principal de sua loja e onde ficara o titulo
-            principal dela no site
-          </span>
-        </p>
-        <p>
-          2 - Logo apos criar sua vitrine, crie as categorias de produtos que
-          sua loja vai vender todos os produtos ficarão separados nas categorias
-          que você criar
-        </p>
-        <p>
-          3 - Após isso,{" "}
-          <span className="font-semibold">crie alguns tamanhos e cores</span>.
-          Tudo pode ser criado ao seu gosto e ficarão disponiveis quando você
-          atribuir aos novos produtos
-        </p>
-        <p>
-          4 - Depois de ter seguidos os passos acima, esta na hora de criar os
-          seu produtos, crie produtos atribuindo em sua devida categoria e
-          vitrine. Apos isso o produto ficara exposto em seu site
-        </p>
+        <Card>
+          <CardHeader className="flex flex-col items-center">
+            <CardTitle>
+              Caso seja sua primeira vez utilizando o programa
+            </CardTitle>
+            <CardDescription>
+              vou explicar brevemente para você ja ir começando a deixar sua
+              loja pronta!
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="shadow-sm">
+            <ConfigCard
+              titulo="Vitrine"
+              texto="É o titulo principal da sua primeira pagina, em sua vitrine principal que você muda a foto da primeira pagina e o nome de sua loja"
+            />
+            <ConfigCard
+              titulo="Categoria"
+              texto="São as categorias dos produtos de toda sua loja, seus clientes poderão navegar pelos tipos que você criar"
+            />
+            <ConfigCard
+              titulo="Produtos"
+              texto="Aqui você visualizar todos os produtos criados na sua loja, assim como criar novos, alterar produtos ou remover produtos"
+            />
+            <ConfigCard
+              titulo="Tamanhos"
+              texto="Aqui você pode criar os tamanhos em que estarão disponiveis na hora que você for cadastrar um produto, podendo ter varios, ou apenas um padrão"
+            />
+            <ConfigCard
+              titulo="Cores"
+              texto="Aqui você pode criar as cores em que estarão disponiveis na hora que você for cadastrar um produto, podendo ser cores especificas, ou uma cor padrão "
+            />{" "}
+          </CardContent>
+          <CardFooter className="flex flex-col">
+            <QuickLinks />
+          </CardFooter>
+        </Card>
       </div>
       <Card>
-        <div className="flex flex-col items-center gap-2">
-          <h2>
-            Clique em alguns dos botões abaixo para ir mais rapidamente criar
-            algo que deseja
-          </h2>
-          <QuickLinks />
-          <div className="flex flex-col items-center mt-6">
-            <p>Atualmente você possui cadastrados:</p>
-            <div className="font-semibold">
-              <p>{produtos.length} produtos</p>
-              <p>{categorias.length} categorias</p>
-              <p>{cores.length} cores</p>
-              <p>{tamanhos.length} tamanhos</p>
-            </div>
-          </div>
-        </div>
+        <CardHeader>
+          <CardTitle className="text-3xl">Resumo de sua loja</CardTitle>
+          <CardDescription className="font-semibold text-lg">
+            Aqui você pode acompanhar quantos cadastros e produtos você tem
+            online
+          </CardDescription>
+          <CardContent className="flex flex-col self-center gap-3 mt-3 shadow-lg border">
+            <CardDescription className="text-lg">
+              Numero de produtos: {produtos.length}
+            </CardDescription>
+            <CardDescription className="text-lg">
+              Numero de categorias: {categorias.length}
+            </CardDescription>
+            <CardDescription className="text-lg">
+              Numero de Cores: {cores.length}
+            </CardDescription>
+          </CardContent>
+        </CardHeader>
       </Card>
     </div>
   );
