@@ -52,6 +52,7 @@ const formSchema = z.object({
   sizeId: z.string().min(1),
   isFeatured: z.boolean(),
   isArchived: z.boolean(),
+  estoque: z.coerce.number().min(1),
 });
 
 type ProductFormValues = z.infer<typeof formSchema>;
@@ -320,6 +321,24 @@ const ProductForm: React.FC<ProductFormProps> = ({
                     </SelectContent>
                   </Select>
 
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="estoque"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Estoque</FormLabel>
+                  <FormControl>
+                    <Input
+                      type="number"
+                      disabled
+                      placeholder="0.00"
+                      {...field}
+                    />
+                  </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
