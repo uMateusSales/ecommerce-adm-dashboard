@@ -71,7 +71,7 @@ const DashboardPage: React.FC<DashboardPageProps> = async ({ params }) => {
             />
             <ConfigCard
               titulo="Categoria"
-              texto="São as categorias dos produtos de toda sua loja, seus clientes poderão navegar pelos tipos que você criar"
+              texto="São as categorias dos produtos de toda sua loja, seus clientes poderão navegar pelas categorias para encontrat um determinado tipo de produto"
             />
             <ConfigCard
               titulo="Produtos"
@@ -93,12 +93,14 @@ const DashboardPage: React.FC<DashboardPageProps> = async ({ params }) => {
       </div>
       <Card>
         <CardHeader>
-          <CardTitle className="text-3xl">Resumo de sua loja</CardTitle>
+          <CardTitle className="text-3xl flex flex-col gap-3">
+            Resumo de sua loja
+          </CardTitle>
           <CardDescription className="font-semibold text-lg">
             Aqui você pode acompanhar quantos cadastros e produtos você tem
             online
           </CardDescription>
-          <CardContent className="flex flex-col self-center gap-3 mt-3 shadow-lg border">
+          <CardContent className="flex flex-col self-center p-3 gap-4 mt-3 shadow-lg border">
             <CardDescription className="text-lg">
               Numero de produtos: {produtos.length}
             </CardDescription>

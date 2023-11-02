@@ -65,7 +65,7 @@ export const MainNav = ({
             href={i.href}
             key={i.href}
             className={cn(
-              "text-sm font-medium transition-colors hover:text-primary",
+              "text-base shadow-sm font-medium transition-colors hover:text-primary",
               i.active ? "text-black dark:text-white" : "text-muted-foreground"
             )}
           >

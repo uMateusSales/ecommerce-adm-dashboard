@@ -21,6 +21,10 @@ export const QuickLinks = ({
       href: `${origin}/${params.storeId}/categories/new`,
       label: `Criar nova categoria`,
     },
+    {
+      href: `${origin}/${params.storeId}/billboards`,
+      label: "Mudar vitrine da sua loja",
+    },
   ];
   console.log(pathname);
   return (
