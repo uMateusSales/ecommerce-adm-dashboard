@@ -4,6 +4,7 @@ import { format } from "date-fns";
 import { ProductClient } from "./components/client";
 import { ProductColumn } from "./components/columns";
 import { priceFormatter } from "@/lib/utils";
+import { ptBR } from "date-fns/locale";
 
 const ProductsPage = async ({ params }: { params: { storeId: string } }) => {
   const products = await prisma.product.findMany({
@@ -14,7 +15,7 @@ const ProductsPage = async ({ params }: { params: { storeId: string } }) => {
 
   const formattedProducts: ProductColumn[] = products.map((i) => ({
     id: i.id,
-    createdAt: format(i.createdAt, "MMMM do, yyyy"),
+    createdAt: format(i.createdAt, "do MMMM, yyyy", { locale: ptBR }),
     name: i.name,
     isFeatured: i.isFeatured,
     isArchived: i.isArchived,
