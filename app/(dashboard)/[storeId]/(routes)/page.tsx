@@ -50,7 +50,8 @@ const DashboardPage: React.FC<DashboardPageProps> = async ({ params }) => {
           <CardContent className="flex flex-col items-center text-lg">
             Sua loja é: {store?.name}
             <p className="font-semibold">
-              Sua vitrine principal é a : {vitrine?.label}
+              Sua vitrine principal é onde você pode mudar opções da sua
+              primeira pagina
             </p>
           </CardContent>
         </Card>

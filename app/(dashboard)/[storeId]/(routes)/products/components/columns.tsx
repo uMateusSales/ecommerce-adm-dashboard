@@ -28,7 +28,7 @@ export const columns: ColumnDef<ProductColumn>[] = [
   },
   {
     accessorKey: "isFeatured",
-    header: "Disponivel",
+    header: "Online no site",
   },
   {
     accessorKey: "price",
@@ -41,15 +41,14 @@ export const columns: ColumnDef<ProductColumn>[] = [
   {
     accessorKey: "color",
     header: "Cor",
-    cell: ({ row }) => (
-      <div className="flex items-center gap-x-2">
-        {row.original.color}
-        <div
-          className="h-5 w-5 rounded-full border"
-          style={{ backgroundColor: row.original.color }}
-        />
-      </div>
-    ),
+    // cell: ({ row }) => (
+    //   <div className="flex items-center gap-x-2">
+    //     {row.original.color}
+    //     <div
+    //       className="h-5 w-5 rounded-full border"
+    //       style={{ backgroundColor: row.original.color }}
+    //     />
+    //   </div> ),
   },
   {
     accessorKey: "createdAt",

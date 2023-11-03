@@ -1,6 +1,6 @@
 import prisma from "@/lib/prismadb";
 import { format } from "date-fns";
-
+import { ptBR } from "date-fns/locale";
 import { ColorClient } from "./components/client";
 import { ColorColmumn } from "./components/columns";
 
@@ -12,7 +12,7 @@ const ColorsPage = async ({ params }: { params: { storeId: string } }) => {
 
   const formattedColors: ColorColmumn[] = colors.map((i) => ({
     id: i.id,
-    createdAt: format(i.createdAt, "MMMM do, yyyy"),
+    createdAt: format(i.createdAt, "do MMMM, yyyy", { locale: ptBR }),
     name: i.name,
     value: i.value,
   }));
