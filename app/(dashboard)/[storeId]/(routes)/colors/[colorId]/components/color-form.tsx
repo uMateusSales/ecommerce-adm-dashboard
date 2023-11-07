@@ -152,8 +152,9 @@ const ColorForm: React.FC<ColorFormProps> = ({ data, ...props }) => {
                   <FormControl>
                     <div className="flex items-center gap-x-4">
                       <Input
+                        defaultValue={"#FFFFF"}
                         disabled={loading}
-                        placeholder="Valor da cor (hex)"
+                        placeholder="Valor da cor (hex) ex: #FFFFFF"
                         {...field}
                       />
                       <div

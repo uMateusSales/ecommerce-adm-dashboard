@@ -332,6 +332,7 @@ const ProductForm: React.FC<ProductFormProps> = ({
                 <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounder-md border p-4">
                   <FormControl>
                     <Checkbox
+                      defaultChecked={true}
                       checked={field.value}
                       //@ts-ignore
                       onCheckedChange={field.onChange}
