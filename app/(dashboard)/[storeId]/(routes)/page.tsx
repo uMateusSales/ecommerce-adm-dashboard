@@ -60,7 +60,7 @@ const DashboardPage: React.FC<DashboardPageProps> = async ({ params }) => {
             <CardTitle>
               Caso seja sua primeira vez utilizando o programa
             </CardTitle>
-            <CardDescription>
+            <CardDescription className="text-base">
               vou explicar brevemente para você ja ir começando a deixar sua
               loja pronta!
             </CardDescription>
